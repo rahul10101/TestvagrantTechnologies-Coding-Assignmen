@@ -9,16 +9,15 @@ public class UITestContext {
 
 	private WebDriver driver;
 	private WeatherSectionPageObjects weatherSectionPageObjects;
-	
+
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public WebDriver getDriver() {
 		return driver;
 	}
 
-	
 	public WeatherSectionPageObjects getweatherSectionPageObjects() {
 		return weatherSectionPageObjects;
 	}
@@ -27,7 +26,5 @@ public class UITestContext {
 		weatherSectionPageObjects = new WeatherSectionPageObjects(driver, scn);
 
 	}
-
-	
 
 }

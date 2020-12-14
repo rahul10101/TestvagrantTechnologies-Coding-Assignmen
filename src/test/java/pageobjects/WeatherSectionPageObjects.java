@@ -6,8 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import cucumber.api.Scenario;
 import utils.ui.Interact;
@@ -19,9 +21,9 @@ public class WeatherSectionPageObjects extends Interact {
 	private By weathe_section_Button = By.xpath("//a[contains(text(),'WEATHER')]");
 	private By Searchbox_pin_your_city = By.xpath("//input[@id='searchBox']");
 	private By city_list = By.xpath("//*[@id='messages']/div");
-	private By select_city_checkbox = By.xpath("//input[@type='checkbox']");
+	private By select_city_checkbox = By.xpath("//*[@id='messages']/div[67]/label");
 	private By city_names_on_map = By.xpath("//div[@class='cityText']");
-	private By weather_details_of_selected_city = By.xpath("//span[@class='tempWhiteText']");
+	private By weather_details_of_selected_city = By.xpath("//*[@id='map_canvas']/div[1]/div[4]/div[12]/div");
 
 	public WeatherSectionPageObjects(WebDriver driver, Scenario s) {
 		setDriver(driver);
@@ -35,26 +37,25 @@ public class WeatherSectionPageObjects extends Interact {
 
 	public void ClickOn_Weather_Section() {
 		clickElement(weathe_section_Button);
-		logger.info("Clicked on weathe Button");
+		logger.info("Clicked on weather Button");
 	}
 
-	public void ClickOn_city_Name_In_Map(String cityName) {
-		clickElement(city_names_on_map);
-		logger.info("Clicked on city name on map");
+	public void validate_city_Name_In_Map(String cityName) {
+		if (validateElementIsDisplayed(city_names_on_map) == true)
+			logger.info("city name on map is Available");
+		takeScreenShotAndAttachInReport(scn);
 	}
 
 	public void ClickOn_city_checkbox() {
-		if (validateElementIsDisplayed(select_city_checkbox)) {
-			if (validateElementIsDisabled(select_city_checkbox)) {
-				clickElement(select_city_checkbox);
-				logger.info("Clicked on city checkbox");
-			}
-		}
+
+		selectbyElement(select_city_checkbox);
+		logger.info("Clicked on city checkbox");
 	}
 
 	public void ClickOn_weather_details_of_selected_city() {
 		clickElement(weather_details_of_selected_city);
 		logger.info("Clicked on weather details of selected city");
+		takeScreenShotAndAttachInReport(scn);
 	}
 
 	public void SetSearchTextBox(String text) {

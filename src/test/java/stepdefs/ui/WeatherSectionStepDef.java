@@ -40,26 +40,22 @@ public class WeatherSectionStepDef extends TestBase {
 		uitestContext.initializePageObjectClasses(driver, scn);
 	}
 
-	@When("I click on top name more in category section")
-	public void i_click_on_top_name_more_in_category_section() {
+	@When("I click on top name more in category section and in weather Section Searched City {string}")
+	public void i_click_on_top_name_more_in_category_section_and_in_weather_Section_Searched_City(String cityName) throws InterruptedException {
 		uitestContext.getweatherSectionPageObjects().ClickOnTop_Name_More_Sectionn();
-
-	}
-
-	@When("I click on weather")
-	public void i_click_on_weather() {
 		uitestContext.getweatherSectionPageObjects().ClickOn_Weather_Section();
-	}
-
-	@When("I enter search city {string}")
-	public void i_enter_search_city(String cityName) {
 		uitestContext.getweatherSectionPageObjects().SetSearchTextBox(cityName);
-		uitestContext.getweatherSectionPageObjects().ClickOn_city_checkbox();
+		//uitestContext.getweatherSectionPageObjects().ClickOn_city_checkbox();
+		
+		
+		
+
 	}
 
 	@Then("I validate {string} city is available on the map with temparature information")
 	public void i_validate_corresponding_city_is_available_on_the_map_with_temparature_information(String cityName) {
-		uitestContext.getweatherSectionPageObjects().ClickOn_city_Name_In_Map(cityName);
+		uitestContext.getweatherSectionPageObjects().ClickOn_city_checkbox();
+		uitestContext.getweatherSectionPageObjects().validate_city_Name_In_Map(cityName);
 
 	}
 
